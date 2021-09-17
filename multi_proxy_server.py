@@ -19,7 +19,7 @@ def get_remote_ip(host):
     return remote_ip
 
 # Handle request from client 
-def handle_request(conn, addr, proxy_end):
+def handle_request(conn, proxy_end):
     client_full_data = conn.recv(BUFFER_SIZE)
     print(f'Sending received data {client_full_data} to external host (Google)...')
     proxy_end.sendall(client_full_data)
@@ -58,7 +58,7 @@ def main():
                 # Connect proxy_end to remote IP of external host 
                 proxy_end.connect( (remote_ip, extern_port) )
                 
-                p = Process( target=handle_request, args=(conn, addr, proxy_end) )
+                p = Process( target=handle_request, args=(conn, proxy_end) )
                 p.daemon = True
                 p.start()
                 print('Process started ', p)
