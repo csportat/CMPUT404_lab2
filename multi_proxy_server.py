@@ -28,7 +28,7 @@ def handle_request(conn, addr, proxy_end):
     external_full_data = proxy_end.recv(BUFFER_SIZE)
     print(f'Sending received data {external_full_data} to client...')
     conn.sendall(external_full_data)
-    conn.shutdown(socket.SHUT_RDWR)
+    #conn.shutdown(socket.SHUT_RDWR)
     
     return
 
